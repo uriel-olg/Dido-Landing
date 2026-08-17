@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+@theme {
+  --color-celeste: #5B9CB8;
+  --color-celeste-light: #F4FAFD;
+  --color-celeste-border: #EAF6FB;
+  --color-celeste-pale: #C8E4EF;
+  --color-celeste-muted: #9DB8C4;
+  --color-carbon: #2C3E46;
+  --color-gray-blue: #5A6B72;
+  --color-success: #4CAF7D;
+  --color-error: #E4635C;
+  --color-celeste-hover: #4A87A0;
+
+  --font-sans: "Poppins", sans-serif;
+  --font-serif: "Playfair Display", serif;
+
+
+  --radius-card: 16px;
+}
