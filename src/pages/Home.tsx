@@ -4,14 +4,7 @@ export const Home = () => {
   return (
     <>
       <section
-        className="
-    min-h-[162.2px]
-    bg-cover
-    bg-no-repeat
-    bg-[95%]
-    md:bg-[100%_center]
-    md:min-h-[400px]
-  "
+        className="min-h-[162.2px] bg-cover bg-no-repeat bg-[95%] md:bg-[100%_center] md:min-h-[400px] "
         style={{ backgroundImage: `url(${"fondo-1.png"})` }}
       >
         <div className="flex min-h-[500px]  items-center md:text-center">
