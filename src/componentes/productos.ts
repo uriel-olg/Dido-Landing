@@ -1,88 +1,92 @@
 export interface Producto {
-    id:number,
-    nombre:string,
-    precio: number,
-    imagen:string
-    categoria:string
+  id: number;
+  nombre: string;
+  precio: number;
+  img: string;
+  categoria: string;
 }
 
 export const categorias = [
-  "todos",
-  "dulces",   // tortas, cookies, postres, facturas dulces
-  "salados",  // focaccias, chipa, panificados salados
-  "bebidas",
-  "boxes",
+  {
+    label: "Todos",
+    slug: "todos",
+    img: "/todo.png",
+  },
+  {
+    label: "Tortas",
+    slug: "tortas",
+    img: "/pastel.png",
+  },
+  {
+    label: "Dulce",
+    slug: "dulce",
+    img: "/cupcake-2.png",
+  },
+  {
+    label: "Salado",
+    slug: "salado",
+    img: "/pan.png",
+  },
+  {
+    label: "Bebidas",
+    slug: "bebidas",
+    img: "/bebida.png",
+  },
+  {
+    label: "Boxs",
+    slug: "boxs",
+    img: "/caja.png",
+  },
 ];
 
-export const Productos: Producto[] = [
+export const productos: Producto[] = [
   {
     id: 1,
-    nombre: "Cookies de chocolate",
-    precio: 1000,
-    imagen: "dasd",
-    categoria: "dulces",
+    nombre: "Chocotorta",
+    categoria: "tortas",
+    precio: 8500,
+    img:"chocotorta.png",
   },
   {
     id: 2,
-    nombre: "Torta de vainilla",
-    precio: 4500,
-    imagen: "dasd",
-    categoria: "dulces",
+    nombre: "Tiramisú",
+    categoria: "dulce",
+    precio: 7500,
+    img: "tiramisu.png",
   },
   {
     id: 3,
-    nombre: "Medialunas",
-    precio: 800,
-    imagen: "dasd",
-    categoria: "salados",
+    nombre: "Cupcake",
+    categoria: "dulce",
+    precio: 2500,
+    img: "tiramisu.png",
   },
   {
     id: 4,
-    nombre: "Flan casero",
-    precio: 1200,
-    imagen: "dasd",
-    categoria: "dulces",
+    nombre: "Focaccia",
+    categoria: "salado",
+    precio: 5000,
+    img: "focaccia.png",
   },
   {
     id: 5,
-    nombre: "Cookies de avena",
-    precio: 1000,
-    imagen: "dasd",
-    categoria: "dulces",
+    nombre: "Chipá",
+    categoria: "salado",
+    precio: 3500,
+    img: "chipa.png",
   },
   {
     id: 6,
-    nombre: "Cookies de chocolate",
-    precio: 1000,
-    imagen: "dasd",
-    categoria: "dulces",
+    nombre: "Café",
+    categoria: "bebidas",
+    precio: 2000,
+    img: "cafe.png",
   },
   {
     id: 7,
-    nombre: "Torta de vainilla",
-    precio: 4500,
-    imagen: "dasd",
-    categoria: "dulces",
-  },
-  {
-    id: 8,
-    nombre: "Medialunas",
-    precio: 800,
-    imagen: "dasd",
-    categoria: "salados",
-  },
-  {
-    id: 9,
-    nombre: "Flan casero",
-    precio: 1200,
-    imagen: "dasd",
-    categoria: "dulces",
-  },
-  {
-    id: 10,
-    nombre: "Cookies de avena",
-    precio: 1000,
-    imagen: "dasd",
-    categoria: "dulces",
+    nombre: "Box Desayuno",
+    categoria: "boxs",
+    precio: 12000,
+    img:"box-desayuno.png",
   },
 ];

@@ -18,21 +18,21 @@ export const Footer = () => {
               href="https://instagram.com/by.didos"
               className="size-9 bg-carbon flex items-center justify-center rounded-full"
             >
-              <img src="instagram.png" alt="Instagram" className="size-5" />
+              <img src="/instagram.png" alt="Instagram" className="size-5" />
             </a>
 
             <a
               href="https://facebook.com/by.didos"
               className="size-9 bg-carbon flex items-center justify-center rounded-full"
             >
-              <img src="facebook.png" alt="Facebook" className="size-5" />
+              <img src="/facebook.png" alt="Facebook" className="size-5" />
             </a>
 
             <a
               href="https://wa.me/542625591849?text=Hola, quiero hacer un pedido"
               className="size-9 bg-carbon flex items-center justify-center rounded-full"
             >
-              <img src="whatsapp-2.png" alt="WhatsApp" className="size-5" />
+              <img src="/whatsapp-2.png" alt="WhatsApp" className="size-5" />
             </a>
           </div>
         </div>
@@ -45,17 +45,17 @@ export const Footer = () => {
 
           <ul className="mt-4 flex flex-col gap-3 text-sm text-carbon">
             <li className="flex items-center gap-2">
-              <img src="whatsapp.png" alt="WhatsApp" className="size-5" />
+              <img src="/whatsapp.png" alt="WhatsApp" className="size-5" />
               <span>+54 9 261 123 4567</span>
             </li>
 
             <li className="flex items-center gap-2">
-              <img src="ubicacion.png" alt="Ubicación" className="size-5" />
+              <img src="/ubicacion.png" alt="Ubicación" className="size-5" />
               <span>Mendoza, Argentina</span>
             </li>
 
             <li className="flex items-center gap-2">
-              <img src="reloj.png" alt="Horario" className="size-5" />
+              <img src="/reloj.png" alt="Horario" className="size-5" />
               <span>Lun a Sáb 9:00 - 20:00 hs</span>
             </li>
           </ul>

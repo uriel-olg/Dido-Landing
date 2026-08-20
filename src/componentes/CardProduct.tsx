@@ -2,7 +2,7 @@ interface Producto {
   id: number;
   nombre: string;
   precio: number;
-  imagen: string;
+  img: string;
   categoria: string;
 }
 
@@ -12,19 +12,17 @@ interface ProductCardProps {
 
 export default function CardProduct({ producto }: ProductCardProps) {
   return (
-    <article className="flex flex-colsrounded-2xl border border-celeste-border bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <article className="flex flex-col rounded-3xl border border-celeste-border bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
       {/* Imagen */}
-      <div className="h-56 overflow-hidden">
+      <div className="h-56 overflow-hidden rounded-3xl">
         <img
-          src={producto.imagen}
+          src={`/${producto.img}`}
           alt={producto.nombre}
           className=" object-cover transition duration-500 group-hover:scale-105"
         />
 
         {/* Categoría */}
-        <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-celeste shadow-sm backdrop-blur-sm">
-          {producto.categoria}
-        </span>
+        
       </div>
 
       {/* Información */}

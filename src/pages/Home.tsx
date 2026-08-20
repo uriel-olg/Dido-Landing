@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { categorias } from "../componentes/productos";
 
 export const Home = () => {
   return (
@@ -33,39 +34,25 @@ export const Home = () => {
       <section className="flex flex-col items-center pt-10 pb-10">
         <h2 className=" text-celeste text-lg md:text-2xl">Categorias</h2>
         <br />
-        <ul className="flex flex-row flex-wrap md:flex-nowrap justify-center gap-10 md:gap-30 mt-6">
-          {[
-            { img: "pastel.png", label: "Tortas", slug: "tortas" },
-            { img: "galleta.png", label: "Galletas", slug: "galletas" },
-            { img: "un-pan.png", label: "Panaderia", slug: "panaderia" },
-            { img: "vaso.png", label: "Bebidas", slug: "bebidas" },
-          ].map((cat) => (
+        <ul className="flex flex-row flex-wrap md:flex-nowrap justify-center gap-10 md:gap-15 py-6">
+          
+          {categorias.map((cat) => (
             <li
               key={cat.label}
-              className="font-serif text-carbon text-center w-1/6 "
+              className="font-serif text-carbon text-center size-30 "
             >
-              <div className="rounded-full size-17 md:size-30 mx-auto flex items-center justify-center bg-white shadow-lg shadow-black/10 group-hover:shadow-xl group-hover:scale-105 transition-all duration-200">
-                <img
-                  src={cat.img}
-                  alt={cat.label}
-                  className="size-9 md:size-16"
-                />
-              </div>
-              <p className="mt-2 mb-1 group-hover:text-celeste transition-colors text-xs md:text-xl md:pt-5">
-                {cat.label}
-              </p>
-              {/* { <Link
-                ref={`/productos?categoria=${cat.slug}`}
+              <NavLink
+                to={`/productos/:categoria=${cat.slug}`}
                 className="group flex flex-col items-center"
               >
-                <div className="rounded-full size-18 mx-auto flex items-center justify-center bg-white shadow-lg shadow-black/10 group-hover:shadow-xl group-hover:scale-105 transition-all duration-200">
-                  <img src={cat.img} alt={cat.label} className="size-10" />
+                <div className="rounded-full size-25 mx-auto flex items-center justify-center bg-white shadow-lg shadow-black/10 group-hover:shadow-xl group-hover:scale-105 transition-all duration-200">
+                  <img src={cat.img} alt={cat.label} className="size-13" />
                 </div>
-                <p className="mt-2 mb-1 group-hover:text-celeste transition-colors">
+                <p className="py-5 group-hover:text-celeste transition-colors font-sans text-lg">
                   {cat.label}
                 </p>
-              </Link> } */}
-              <div className="border-b border-celeste-muted/70  w-1/4 md:w-1/6 mx-auto" />
+              </NavLink> 
+              
             </li>
           ))}
         </ul>
