@@ -44,9 +44,10 @@ export const Footer = () => {
           </h2>
 
           <ul className="mt-4 flex flex-col gap-3 text-sm text-carbon">
+            
             <li className="flex items-center gap-2">
               <img src="/whatsapp.png" alt="WhatsApp" className="size-5" />
-              <span>+54 9 261 123 4567</span>
+              <span>+54 2625 591849</span>
             </li>
 
             <li className="flex items-center gap-2">
@@ -58,6 +59,7 @@ export const Footer = () => {
               <img src="/reloj.png" alt="Horario" className="size-5" />
               <span>Lun a Sáb 9:00 - 20:00 hs</span>
             </li>
+
           </ul>
         </div>
 

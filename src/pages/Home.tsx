@@ -23,7 +23,10 @@ export const Home = () => {
               seleccionados.
             </p>
 
-            <a  href="/productos?" className="mt-10 w-3/6 md:w-1/6 rounded-full bg-celeste px-6 py-3 text-white" >
+            <a
+              href="/productos?"
+              className="mt-10 w-3/6 md:w-1/6 rounded-full bg-celeste px-6 py-3 text-white"
+            >
               Ver el menú →
             </a>
           </div>
@@ -32,27 +35,67 @@ export const Home = () => {
 
       {/* seccion categorias */}
       <section className="flex flex-col items-center pt-10 pb-10">
-        <h2 className=" text-celeste text-lg md:text-2xl">Categorias</h2>
-        <br />
-        <ul className="flex flex-row flex-wrap md:flex-nowrap justify-center gap-10 md:gap-15 py-6">
-          
+        <h2 className="text-celeste text-lg md:text-2xl">Categorías</h2>
+
+        <ul
+          className="
+      flex w-full gap-5
+      overflow-x-auto
+      px-6 py-6
+      snap-x snap-mandatory
+      scrollbar-hide
+
+      md:justify-center
+      md:gap-15
+      md:overflow-visible
+    "
+        >
           {categorias.map((cat) => (
             <li
               key={cat.label}
-              className="font-serif text-carbon text-center size-30 "
+              className="
+          min-w-[120px]
+          flex-shrink-0
+          snap-center
+          font-serif
+          text-carbon
+          text-center
+        "
             >
               <NavLink
-                to={`/productos/:categoria=${cat.slug}`}
+                to={`/productos/${cat.slug}`}
                 className="group flex flex-col items-center"
               >
-                <div className="rounded-full size-25 mx-auto flex items-center justify-center bg-white shadow-lg shadow-black/10 group-hover:shadow-xl group-hover:scale-105 transition-all duration-200">
-                  <img src={cat.img} alt={cat.label} className="size-13" />
+                <div
+                  className="
+              size-25
+              flex items-center justify-center
+              rounded-full
+              bg-white
+              shadow-lg shadow-black/10
+              transition-all duration-200
+              group-hover:scale-105
+              group-hover:shadow-xl
+            "
+                >
+                  <img
+                    src={cat.img}
+                    alt={cat.label}
+                    className="size-13 object-contain"
+                  />
                 </div>
-                <p className="py-5 group-hover:text-celeste transition-colors font-sans text-lg">
+
+                <p
+                  className="
+              py-5
+              font-sans text-lg
+              transition-colors
+              group-hover:text-celeste
+            "
+                >
                   {cat.label}
                 </p>
-              </NavLink> 
-              
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -118,7 +161,6 @@ export const Home = () => {
 
       {/* Como pedir ? */}
       <section className="flex flex-col items-center p-10  bg-white">
-        
         <div className="gap-10 md:flex md:flex-row justify-around items-center w-full">
           {/* div 1 */}
           <div className="flex flex-col md:flex-col-2 items-center w-full max-w-5xl">
@@ -166,7 +208,7 @@ export const Home = () => {
                     {
                       paso: "4",
                       texto: "Retirá o recibilo en tu casa",
-                      img: "orden.png",
+                      img: "caja.png",
                     },
                   ].map((item) => (
                     <div
@@ -183,7 +225,7 @@ export const Home = () => {
                       {/* Icono */}
                       <div className="mt-6 flex size-20 items-center justify-center rounded-2xl bg-celeste/10 transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-celeste/15">
                         <img
-                          src={item.img}
+                          src={`/${item.img}`}
                           alt=""
                           className="size-10 object-contain"
                         />

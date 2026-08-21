@@ -14,7 +14,7 @@ export default function CardProduct({ producto }: ProductCardProps) {
   return (
     <article className="flex flex-col rounded-3xl border border-celeste-border bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
       {/* Imagen */}
-      <div className="h-56 overflow-hidden rounded-3xl">
+      <div className="h-40 md:h-56 overflow-hidden rounded-3xl">
         <img
           src={`/${producto.img}`}
           alt={producto.nombre}
@@ -37,12 +37,13 @@ export default function CardProduct({ producto }: ProductCardProps) {
           </p>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-5">
           <span className="text-xl font-semibold text-celeste">
             ${producto.precio}
           </span>
-
-          <button
+          
+          <a
+            href={`https://wa.me/542625591849?text=Hola, quiero hacer un pedido de: ${producto.nombre},el Precio es: ${producto.precio}`}
             className="
               rounded-full
               bg-celeste
@@ -58,7 +59,7 @@ export default function CardProduct({ producto }: ProductCardProps) {
             "
           >
             Pedir
-          </button>
+          </a>
         </div>
       </div>
     </article>
