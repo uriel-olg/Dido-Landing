@@ -15,12 +15,12 @@ export const categorias = [
   {
     label: "Tortas",
     slug: "tortas",
-    img: "/pastel.png",
+    img: "/tortas.png",
   },
   {
     label: "Dulce",
     slug: "dulce",
-    img: "/cupcake-2.png",
+    img: "/cupcake.png",
   },
   {
     label: "Salado",
@@ -30,12 +30,12 @@ export const categorias = [
   {
     label: "Bebidas",
     slug: "bebidas",
-    img: "/bebida.png",
+    img: "/bebidas.png",
   },
   {
     label: "Boxs",
     slug: "boxs",
-    img: "/caja.png",
+    img: "/boxs.png",
   },
 ];
 

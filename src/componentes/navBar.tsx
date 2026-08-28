@@ -32,32 +32,33 @@ export const Navbar = () => {
             Contacto
           </NavLink>
         </li>
-        <li>
-          <a
+    
+      </ul>
+
+      <a
             href="https://wa.me/542625591849?text=Hola ,queria hacer un pedido"
             className="
-    inline-flex items-center justify-center
-    rounded-full
-    bg-celeste
-    px-6 py-3
-    text-xs text-white
-    shadow-md shadow-celeste/20
-    transition-all duration-300
-    hover:-translate-y-0.5
-    hover:bg-celeste-hover
-    hover:shadow-lg hover:shadow-celeste/30
-    active:translate-y-0
-    active:scale-95
-    focus:outline-none
-    focus:ring-2 focus:ring-celeste/40
-    md:px-3 md:py-1.5 md:text-base
-    hover:cursor-pointer
-  "
+             items-center justify-center
+            rounded-full
+            bg-celeste
+            px-6 py-3
+            text-xs text-white
+            shadow-md shadow-celeste/20
+            transition-all duration-300
+            hover:-translate-y-0.5
+            hover:bg-celeste-hover
+            hover:shadow-lg hover:shadow-celeste/30
+            active:translate-y-0
+            active:scale-95
+            focus:outline-none
+            focus:ring-2 focus:ring-celeste/40
+            md:px-3 md:py-1.5 md:text-base
+            hover:cursor-pointer
+            hidden md:block
+          "
           >
             Pedir ahora
           </a>
-        </li>
-      </ul>
 
       <HamburgerMenu />
     </nav>

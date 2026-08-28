@@ -5,31 +5,71 @@ export const Home = () => {
   return (
     <>
       <section
-        className="min-h-[162.2px] bg-cover bg-no-repeat bg-[95%] md:bg-[100%_center] md:min-h-[400px] "
-        style={{ backgroundImage: `url(${"fondo-1.png"})` }}
+        className=" bg-cover bg-no-repeat  md:bg-[100%_center] min-h-[500px] md:min-h-[450px] "
+        style={{ backgroundImage: `url("/fondo-incio.png")` }}
       >
-        <div className="flex min-h-[500px]  items-center md:text-center">
-          <div className="w-full px-8 flex flex-col items-center">
-            <span className="text-sm font-medium text-celeste">
-              HECHO A MANO, CADA DÍA
-            </span>
+        <div
+          className=" relative z-20
+            w-11/12
+            max-w-6xl
+            mx-auto
+            py-16
+            md:py-16
+            flex
+            flex-col
+            justify-center
+            items-center
+            md:items-start
+            min-h-[500px]
+            md:min-h-[450px]"
+        >
+          <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-celeste">
+            hecho a mano,cada dia
+          </span>
 
-            <h1 className="mt-4 text-5xl font-bold text-carbon font-serif">
-              Dulzura en cada detalle
-            </h1>
+          <h1
+            className="mt-4
+        max-w-lg
+       
+        sm:text-2xl
+        md:text-4xl
+        font-serif
+        text-carbon
+        leading-tight
+        uppercase"
+          >
+            <span className="italic">Dulzura en cada detalle</span>
+          </h1>
 
-            <p className="mt-6 text-lg text-gray-700">
-              Tortas, panadería y bocaditos artesanales hechos con ingredientes
-              seleccionados.
-            </p>
+          <p
+            className=" mt-6
+        max-w-md
+        text-gray-blue
+        leading-7
+        text-sm
+        md:text-base"
+          >
+            Tortas, panadería y bocaditos artesanales
+            <br />
+            hechos con ingredientes seleccionados.
+          </p>
 
-            <a
-              href="/productos?"
-              className="mt-10 w-3/6 md:w-1/6 rounded-full bg-celeste px-6 py-3 text-white"
-            >
-              Ver el menú →
-            </a>
-          </div>
+          <a
+            href="/productos?"
+            className="mt-6
+              w-fit
+              rounded-full
+              bg-celeste
+              px-6
+              py-3
+              text-white
+              text-sm
+              md:text-base
+              hover:opacity-90
+              transition"
+          >
+            Ver el menú →
+          </a>
         </div>
       </section>
 
@@ -68,7 +108,7 @@ export const Home = () => {
               >
                 <div
                   className="
-              size-25
+              size-20
               flex items-center justify-center
               rounded-full
               bg-white
@@ -81,7 +121,7 @@ export const Home = () => {
                   <img
                     src={cat.img}
                     alt={cat.label}
-                    className="size-13 object-contain"
+                    className="size-8 object-contain"
                   />
                 </div>
 
@@ -140,12 +180,12 @@ export const Home = () => {
                 className="w-full h-48 object-cover"
               />
               <div className="p-4 flex flex-col items-center text-center font-serif text-carbon">
-                <h3 className="text-lg">{item.nombre}</h3>
+                <h3 className="text-lg font-sans">{item.nombre}</h3>
                 <p className="mt-1 text-celeste">{item.precio}</p>
                 <br />
                 <a
                   href={`https://wa.me/542625591849?text=Hola, quiero hacer un pedido de: ${item.nombre}`}
-                  className="rounded-3xl bg-white border border-celeste-hover px-15 py-1 text-carbon hover:bg-celeste-hover hover:cursor-pointer hover:text-celeste-light"
+                  className="rounded-3xl bg-white border border-celeste-hover px-13 py-1 text-carbon hover:bg-celeste-hover hover:cursor-pointer hover:text-celeste-light font-sans"
                 >
                   Pedir
                 </a>
@@ -154,7 +194,7 @@ export const Home = () => {
           ))}
         </div>
 
-        <button className="mt-10 px-20 py-2 rounded-full border border-celeste bg-celeste font-serif hover:bg-celeste-hover text-white transition-colors duration-200 hover:cursor-pointer">
+        <button className="mt-10 px-20 py-2 rounded-full border border-celeste bg-celeste  hover:bg-celeste-hover text-white transition-colors duration-200 hover:cursor-pointer font-sans">
           Ver todo el menú →
         </button>
       </section>
@@ -256,9 +296,27 @@ export const Home = () => {
           {/* div 2 */}
           <div
             className="
-            min-h-[162.2px] bg-cover bg-no-repeat bg-[95%] md:bg-[100%_left-50] md:min-h-[300px] rounded-3xl
-            flex flex-col items-start justify-center text-center gap-1 p-6 w-full max-w-sm "
-            style={{ backgroundImage: `url(${"cupcake1.png"})` }}
+    min-h-[162px]
+    md:min-h-[300px]
+    w-full max-w-sm
+
+    bg-no-repeat
+
+    bg-[length:140%_auto]
+    md:bg-[length:140%_auto]
+
+    bg-[10%_rigth]
+    md:bg-rigth
+
+    rounded-3xl
+
+    px-10
+    py-5
+    md:py-15
+  "
+            style={{
+              backgroundImage: `url("cupcake-fondo.png")`,
+            }}
           >
             <p className="text-lg text-carbon text-start">
               Pedidos con 24hs
