@@ -1,11 +1,5 @@
-interface Producto {
-  id: number;
-  nombre: string;
-  precio: number;
-  img: string;
-  categoria: string;
-}
-
+import { urlFor } from "../sanity/imageUrl";
+import type { Producto } from "../types/ProductoType";
 interface ProductCardProps {
   producto: Producto;
 }
@@ -16,11 +10,12 @@ export default function CardProduct({ producto }: ProductCardProps) {
       {/* Imagen */}
       <div className="h-40 md:h-56 overflow-hidden rounded-3xl">
         <img
-          src={`/${producto.img}`}
+          
+          src={urlFor(producto.imagen).url()}
           alt={producto.nombre}
           className=" object-cover transition duration-500 group-hover:scale-105"
         />
-
+  
         {/* Categoría */}
         
       </div>

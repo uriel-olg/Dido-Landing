@@ -1,7 +1,23 @@
 import { NavLink } from "react-router-dom";
 import { categorias } from "../componentes/productos";
-
+import { getProducto } from "../sanity/productos";
+import type { Producto } from "../types/ProductoType";
+import { useState,useEffect } from "react";
+import { urlFor } from "../sanity/imageUrl";
 export const Home = () => {
+
+  const [producto, setProductos] = useState<Producto[]>([]);
+  
+    useEffect(() => {
+      const obtenerP = async () => {
+        const producto = await getProducto();
+        console.log(producto);
+        setProductos(producto);
+      };
+  
+      obtenerP();
+    }, []);
+
   return (
     <>
       <section
@@ -148,34 +164,14 @@ export const Home = () => {
         </h2>
 
         <div className="flex flex-1  overflow-x-auto snap-x snap-mandatory gap-4 md:gap-15 md:w-full md:grid md:grid-cols-4  md:overflow-visible mt-8 pb-4 w-full max-w-5xl md:max-w-6xl">
-          {[
-            {
-              img: "tiramisu.png",
-              nombre: "Tiramisu",
-              precio: "$8.500",
-            },
-            {
-              img: "chocotorta.png",
-              nombre: "Chocotorta",
-              precio: "$2.200",
-            },
-            {
-              img: "chipa.png",
-              nombre: "Chipa",
-              precio: "$3.800",
-            },
-            {
-              img: "focaccia.png",
-              nombre: "Focaccia",
-              precio: "$1.800",
-            },
-          ].map((item) => (
+          {producto.filter(p => p.destacados === true)
+          .map((item) => (
             <div
-              key={item.nombre}
+              key={item._id}
               className="snap-center shrink-0 w-64 md:w-auto bg-white rounded-xl shadow-lg shadow-black/10 hover:shadow-xl transition-shadow duration-200 overflow-hidden flex flex-col"
             >
               <img
-                src={item.img}
+                src={urlFor(item.imagen).url()}
                 alt={item.nombre}
                 className="w-full h-48 object-cover"
               />

@@ -1,16 +1,33 @@
+import { getProducto } from "../sanity/productos";
 import { NavLink, useParams } from "react-router-dom";
-
-import { categorias, productos } from "../componentes/productos";
-
+import { categorias } from "../componentes/productos";
 import CardProduct from "../componentes/CardProduct";
+import { useEffect, useState } from "react";
+import type { Producto } from "../types/ProductoType";
+
+
 
 export const PagProductos = () => {
+
+  const [producto, setProductos] = useState<Producto[]>([]);
+
+  useEffect(() => {
+    const obtenerP = async () => {
+      const producto = await getProducto();
+      console.log(producto);
+      setProductos(producto);
+      
+    };
+
+    obtenerP();
+  }, []);
+
   const { categoria } = useParams();
 
   const productosFiltrados =
     !categoria || categoria === "todos"
-      ? productos
-      : productos.filter((producto) => producto.categoria === categoria);
+      ? producto
+      : producto.filter((producto) => producto.categoria === categoria);
 
   return (
     <>
@@ -18,29 +35,29 @@ export const PagProductos = () => {
           HERO
       ========================== */}
       <section
-  className="
+        className="
     relative
     min-h-[500px]
     md:min-h-[450px]
     overflow-hidden
   "
->
-  {/* Imagen de fondo */}
-  <div
-    className="
+      >
+        {/* Imagen de fondo */}
+        <div
+          className="
       absolute inset-0
       bg-cover
       bg-[center_right]
       md:bg-left
     "
-    style={{
-      backgroundImage: `url(${'/hero-inicio.png'})`,
-    }}
-  />
+          style={{
+            backgroundImage: `url(${"/hero-inicio.png"})`,
+          }}
+        />
 
-  {/* Capa blanca */}
-  <div
-    className="
+        {/* Capa blanca */}
+        <div
+          className="
       absolute inset-0
       bg-white/80
       md:bg-transparent
@@ -48,11 +65,11 @@ export const PagProductos = () => {
       md:via-white/80
       md:to-transparent
     "
-  />
+        />
 
-  {/* Contenido */}
-  <div
-    className="
+        {/* Contenido */}
+        <div
+          className="
       relative z-20
       w-11/12
       max-w-6xl
@@ -67,21 +84,21 @@ export const PagProductos = () => {
       min-h-[500px]
       md:min-h-[450px]
     "
-  >
-    <span
-      className="
+        >
+          <span
+            className="
         text-celeste
         uppercase
         tracking-[0.2em]
         text-xs
         md:text-sm
       "
-    >
-      Hecho a mano, con amor
-    </span>
+          >
+            Hecho a mano, con amor
+          </span>
 
-    <h1
-      className="mt-4
+          <h1
+            className="mt-4
         max-w-lg
        
         sm:text-2xl
@@ -90,15 +107,14 @@ export const PagProductos = () => {
         text-carbon
         leading-tight
         uppercase"
-    >
-      Nuestro
-       
-      <span className="italic"> menú</span>
-    </h1>
+          >
+            Nuestro
+            <span className="italic"> menú</span>
+          </h1>
 
-    {/* Línea decorativa */}
-    <div
-      className="
+          {/* Línea decorativa */}
+          <div
+            className="
         flex
         items-center
         justify-center
@@ -106,33 +122,32 @@ export const PagProductos = () => {
         mt-4
         max-w-xs
       "
-    >
-      <div className="h-1px bg-gray-400 flex-1" />
+          >
+            <div className="h-1px bg-gray-400 flex-1" />
 
-      <img
-        src="/corazon.png"
-        alt=""
-        className="size-4 md:size-6 object-contain"
-      />
+            <img
+              src="/corazon.png"
+              alt=""
+              className="size-4 md:size-6 object-contain"
+            />
 
-      <div className="h-1px bg-gray-400 flex-1" />
-    </div>
+            <div className="h-1px bg-gray-400 flex-1" />
+          </div>
 
-    <p
-      className="w-6/6 flex-wrap mt-6
+          <p
+            className="w-6/6 flex-wrap mt-6
         max-w-md
         text-gray-blue
         leading-7
         text-sm
         md:text-base"
-          
-    >
-      Descubrí todas nuestras delicias artesanales,
-      <br className="hidden md:block" />
-      hechas con ingredientes frescos y seleccionados.
-    </p>
-  </div>
-</section>
+          >
+            Descubrí todas nuestras delicias artesanales,
+            <br className="hidden md:block" />
+            hechas con ingredientes frescos y seleccionados.
+          </p>
+        </div>
+      </section>
 
       {/* =========================
           NAV CATEGORIAS
@@ -194,11 +209,7 @@ export const PagProductos = () => {
                       group-hover:scale-105
                       group-hover:shadow-xl
                       whitespace-nowrap
-                      ${
-                        isActive
-                          ? "bg-celeste/70"
-                          : "border border-celeste"
-                      }
+                      ${isActive ? "bg-celeste/70" : "border border-celeste"}
                     `}
                   >
                     {p.img && (
@@ -215,11 +226,7 @@ export const PagProductos = () => {
                         text-xs
                         md:text-base
                         transition-colors
-                        ${
-                          isActive
-                            ? "text-white"
-                            : "text-celeste"
-                        }
+                        ${isActive ? "text-white" : "text-celeste"}
                       `}
                     >
                       {p.label}
@@ -264,7 +271,7 @@ export const PagProductos = () => {
           {productosFiltrados.map((p) => {
             return (
               <li
-                key={p.id}
+                key={p._id}
                 className="
                   flex
                   flex-col
@@ -278,6 +285,7 @@ export const PagProductos = () => {
               </li>
             );
           })}
+
         </ul>
       </section>
 
@@ -366,12 +374,7 @@ export const PagProductos = () => {
             "
           >
             Consultanos por WhatsApp
-
-            <img
-              src="/whatsapp-2.png"
-              alt=""
-              className="size-5"
-            />
+            <img src="/whatsapp-2.png" alt="" className="size-5" />
           </a>
         </div>
 
@@ -391,11 +394,7 @@ export const PagProductos = () => {
           "
         >
           <div className="flex flex-col items-center justify-center gap-2 md:gap-5 flex-1">
-            <img
-              src="/fresa.png"
-              alt=""
-              className="size-7 md:size-10"
-            />
+            <img src="/fresa.png" alt="" className="size-7 md:size-10" />
 
             <p className="text-center text-[10px] md:text-xs leading-tight">
               Ingredientes
@@ -419,11 +418,7 @@ export const PagProductos = () => {
           </div>
 
           <div className="flex flex-col items-center justify-center gap-2 md:gap-5 flex-1">
-            <img
-              src="/magdalena.png"
-              alt=""
-              className="size-7 md:size-10"
-            />
+            <img src="/magdalena.png" alt="" className="size-7 md:size-10" />
 
             <p className="text-center text-[10px] md:text-xs leading-tight">
               Pedidos con 24hs
