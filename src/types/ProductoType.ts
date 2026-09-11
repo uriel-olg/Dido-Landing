@@ -11,5 +11,5 @@ export type Producto = {
   categoria: string;
   imagen: SanityImageSource;
   disponible: boolean;
-  destacado: boolean;
+  destacados: boolean;
 };

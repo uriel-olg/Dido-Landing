@@ -1,338 +1,535 @@
+
+import { motion } from "motion/react";
+import { fadeUp, staggerContainer } from "../animations/animations";
+
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+
 import { categorias } from "../componentes/productos";
 import { getProducto } from "../sanity/productos";
-import type { Producto } from "../types/ProductoType";
-import { useState,useEffect } from "react";
 import { urlFor } from "../sanity/imageUrl";
-export const Home = () => {
 
-  const [producto, setProductos] = useState<Producto[]>([]);
-  
-    useEffect(() => {
-      const obtenerP = async () => {
-        const producto = await getProducto();
-        console.log(producto);
-        setProductos(producto);
-      };
-  
-      obtenerP();
-    }, []);
+import type { Producto } from "../types/ProductoType";
+
+const pasosPedido = [
+  {
+    paso: "1",
+    texto: "Escribinos por WhatsApp",
+    img: "whatsapp.png",
+  },
+  {
+    paso: "2",
+    texto: "Contanos qué querés pedir",
+    img: "notas.png",
+  },
+  {
+    paso: "3",
+    texto: "Confirmamos tiempo y detalles",
+    img: "tiempo-rapido.png",
+  },
+  {
+    paso: "4",
+    texto: "Retirá o recibilo en tu casa",
+    img: "caja.png",
+  },
+];
+
+export const Home = () => {
+  const [productos, setProductos] = useState<Producto[]>([]);
+
+  useEffect(() => {
+    const obtenerProductos = async () => {
+      const data = await getProducto();
+      setProductos(data);
+    };
+
+    obtenerProductos();
+  }, []);
+
+  const destacados = productos.filter((p) => p.destacados === true);
 
   return (
     <>
-      <section
-        className=" bg-cover bg-no-repeat  md:bg-[100%_center] min-h-[500px] md:min-h-[450px] "
-        style={{ backgroundImage: `url("/fondo-incio.png")` }}
-      >
-        <div
-          className=" relative z-20
-            w-11/12
-            max-w-6xl
-            mx-auto
-            py-16
-            md:py-16
-            flex
-            flex-col
-            justify-center
-            items-center
-            md:items-start
-            min-h-[500px]
-            md:min-h-[450px]"
+      {/* =====================
+          HERO
+      ====================== */}
+      <section className="relative min-h-[500px] overflow-hidden md:min-h-[450px]">
+
+        {/* Imagen de fondo */}
+        <motion.div
+          className="absolute inset-0 bg-cover bg-no-repeat md:bg-[100%_center]"
+          style={{
+            backgroundImage: 'url("/fondo-incio.png")',
+          }}
+          initial={{
+            opacity: 0.8,
+            scale: 1.03,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
+          transition={{
+            duration: 0.9,
+            ease: "easeOut",
+          }}
+        />
+
+        {/* Contenido */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          className="relative z-20 mx-auto flex min-h-[500px] w-11/12 max-w-6xl flex-col items-center justify-center py-16 md:min-h-[450px] md:items-start"
         >
-          <span className="text-xs md:text-sm uppercase tracking-[0.2em] text-celeste">
-            hecho a mano,cada dia
-          </span>
-
-          <h1
-            className="mt-4
-        max-w-lg
-       
-        sm:text-2xl
-        md:text-4xl
-        font-serif
-        text-carbon
-        leading-tight
-        uppercase"
+          <motion.span
+            variants={fadeUp}
+            className="text-xs uppercase tracking-[0.2em] text-celeste md:text-sm"
           >
-            <span className="italic">Dulzura en cada detalle</span>
-          </h1>
+            Hecho a mano, cada día
+          </motion.span>
 
-          <p
-            className=" mt-6
-        max-w-md
-        text-gray-blue
-        leading-7
-        text-sm
-        md:text-base"
+          <motion.h1
+            variants={fadeUp}
+            className="mt-4 max-w-lg font-serif text-2xl uppercase leading-tight text-carbon md:text-4xl"
+          >
+            <span className="italic">
+              Dulzura en cada detalle
+            </span>
+          </motion.h1>
+
+          <motion.p
+            variants={fadeUp}
+            className="mt-6 max-w-md text-sm leading-7 text-gray-blue md:text-base"
           >
             Tortas, panadería y bocaditos artesanales
             <br />
             hechos con ingredientes seleccionados.
-          </p>
+          </motion.p>
 
-          <a
-            href="/productos?"
-            className="mt-6
-              w-fit
-              rounded-full
-              bg-celeste
-              px-6
-              py-3
-              text-white
-              text-sm
-              md:text-base
-              hover:opacity-90
-              transition"
+          <motion.div
+            variants={fadeUp}
+            whileHover={{
+              scale: 1.03,
+            }}
+            whileTap={{
+              scale: 0.97,
+            }}
           >
-            Ver el menú →
-          </a>
-        </div>
+            <NavLink
+              to="/productos"
+              className="mt-6 block w-fit rounded-full bg-celeste px-6 py-3 text-sm text-white transition-colors duration-200 hover:bg-celeste-hover md:text-base"
+            >
+              Ver el menú →
+            </NavLink>
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* seccion categorias */}
-      <section className="flex flex-col items-center pt-10 pb-10">
-        <h2 className="text-celeste text-lg md:text-2xl">Categorías</h2>
+      {/* =====================
+          CATEGORÍAS
+      ====================== */}
+      <section className="flex flex-col items-center py-10">
 
-        <ul
-          className="
-      flex w-full gap-5
-      overflow-x-auto
-      px-6 py-6
-      snap-x snap-mandatory
-      scrollbar-hide
-
-      md:justify-center
-      md:gap-15
-      md:overflow-visible
-    "
+        <motion.h2
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.1,
+          }}
+          transition={{
+            duration: 0.5,
+          }}
+          className="text-lg text-celeste md:text-2xl"
         >
-          {categorias.map((cat) => (
-            <li
-              key={cat.label}
-              className="
-          min-w-[120px]
-          flex-shrink-0
-          snap-center
-          font-serif
-          text-carbon
-          text-center
-        "
+          Categorías
+        </motion.h2>
+
+        <ul className="scrollbar-hide flex w-full snap-x snap-mandatory gap-5 overflow-x-auto px-6 py-6 md:justify-center md:gap-15 md:overflow-visible">
+
+          {categorias.map((cat, index) => (
+            <motion.li
+              key={cat.slug}
+              initial={{
+                opacity: 0,
+                y: 20,
+                scale: 0.96,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.05,
+              }}
+              transition={{
+                duration: 0.45,
+                delay: index * 0.08,
+              }}
+              className="min-w-[120px] shrink-0 snap-center text-center font-serif text-carbon"
             >
               <NavLink
                 to={`/productos/${cat.slug}`}
                 className="group flex flex-col items-center"
               >
-                <div
-                  className="
-              size-20
-              flex items-center justify-center
-              rounded-full
-              bg-white
-              shadow-lg shadow-black/10
-              transition-all duration-200
-              group-hover:scale-105
-              group-hover:shadow-xl
-            "
-                >
+                <div className="flex size-20 items-center justify-center rounded-full bg-white shadow-lg shadow-black/10 transition-all duration-300 group-hover:-translate-y-1 group-hover:scale-105 group-hover:shadow-xl">
+
                   <img
                     src={cat.img}
                     alt={cat.label}
                     className="size-8 object-contain"
                   />
+
                 </div>
 
-                <p
-                  className="
-              py-5
-              font-sans text-lg
-              transition-colors
-              group-hover:text-celeste
-            "
-                >
+                <p className="py-5 font-sans text-lg transition-colors duration-200 group-hover:text-celeste">
                   {cat.label}
                 </p>
               </NavLink>
-            </li>
+            </motion.li>
           ))}
+
         </ul>
       </section>
 
-      {/*seccion destacados  */}
-      <section className="flex flex-col items-center py-10 px-4 w-full bg-celeste-light">
-        <h2 className="pb-2 border-b border-celeste-light text-celeste text-lg md:text-2xl">
-          Destacados
-        </h2>
+      {/* =====================
+          DESTACADOS
+      ====================== */}
+      <section className="flex w-full flex-col items-center bg-celeste-light px-4 py-10">
 
-        <div className="flex flex-1  overflow-x-auto snap-x snap-mandatory gap-4 md:gap-15 md:w-full md:grid md:grid-cols-4  md:overflow-visible mt-8 pb-4 w-full max-w-5xl md:max-w-6xl">
-          {producto.filter(p => p.destacados === true)
-          .map((item) => (
-            <div
-              key={item._id}
-              className="snap-center shrink-0 w-64 md:w-auto bg-white rounded-xl shadow-lg shadow-black/10 hover:shadow-xl transition-shadow duration-200 overflow-hidden flex flex-col"
+        <motion.h2
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.1,
+          }}
+          transition={{
+            duration: 0.5,
+          }}
+          className="border-b border-celeste-light pb-2 text-lg text-celeste md:text-2xl"
+        >
+          Destacados
+        </motion.h2>
+
+        <div className="mt-8 flex w-full max-w-5xl snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:grid md:max-w-6xl md:grid-cols-4 md:gap-15 md:overflow-visible">
+
+          {destacados.map((producto, index) => (
+            <motion.div
+              key={producto._id}
+
+              initial={{
+                opacity: 0,
+                y: 25,
+              }}
+
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+
+              viewport={{
+                once: true,
+                amount: 0.05,
+              }}
+
+              transition={{
+                duration: 0.5,
+                delay: index * 0.08,
+              }}
+
+              whileHover={{
+                y: -5,
+              }}
+
+              className="flex w-64 shrink-0 snap-center flex-col overflow-hidden rounded-xl bg-white shadow-lg shadow-black/10 transition-shadow duration-300 hover:shadow-xl md:w-auto"
             >
-              <img
-                src={urlFor(item.imagen).url()}
-                alt={item.nombre}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4 flex flex-col items-center text-center font-serif text-carbon">
-                <h3 className="text-lg font-sans">{item.nombre}</h3>
-                <p className="mt-1 text-celeste">{item.precio}</p>
-                <br />
-                <a
-                  href={`https://wa.me/542625591849?text=Hola, quiero hacer un pedido de: ${item.nombre}`}
-                  className="rounded-3xl bg-white border border-celeste-hover px-13 py-1 text-carbon hover:bg-celeste-hover hover:cursor-pointer hover:text-celeste-light font-sans"
+
+              {/* Imagen */}
+              <div className="overflow-hidden">
+                <img
+                  src={urlFor(producto.imagen).url()}
+                  alt={producto.nombre}
+                  className="h-48 w-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+
+              {/* Información */}
+              <div className="flex flex-col items-center p-4 text-center font-serif text-carbon">
+
+                <h3 className="font-sans text-lg">
+                  {producto.nombre}
+                </h3>
+
+                <p className="mt-1 text-celeste">
+                  {producto.precio}
+                </p>
+
+                <motion.a
+                  whileHover={{
+                    scale: 1.03,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
+                  href={`https://wa.me/542625591849?text=Hola, quiero hacer un pedido de: ${producto.nombre}`}
+                  className="mt-5 rounded-3xl border border-celeste-hover px-13 py-1 font-sans text-carbon transition-colors duration-200 hover:bg-celeste-hover hover:text-white"
                 >
                   Pedir
-                </a>
+                </motion.a>
+
               </div>
-            </div>
+            </motion.div>
           ))}
+
         </div>
 
-        <button className="mt-10 px-20 py-2 rounded-full border border-celeste bg-celeste  hover:bg-celeste-hover text-white transition-colors duration-200 hover:cursor-pointer font-sans">
-          Ver todo el menú →
-        </button>
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.1,
+          }}
+          transition={{
+            duration: 0.5,
+          }}
+          whileHover={{
+            scale: 1.03,
+          }}
+          whileTap={{
+            scale: 0.97,
+          }}
+          className="mt-10"
+        >
+          <NavLink
+            to="/productos"
+            className="block rounded-full border border-celeste bg-celeste px-20 py-2 font-sans text-white transition-colors duration-200 hover:bg-celeste-hover"
+          >
+            Ver todo el menú →
+          </NavLink>
+        </motion.div>
+
       </section>
 
-      {/* Como pedir ? */}
-      <section className="flex flex-col items-center p-10  bg-white">
-        <div className="gap-10 md:flex md:flex-row justify-around items-center w-full">
-          {/* div 1 */}
-          <div className="flex flex-col md:flex-col-2 items-center w-full max-w-5xl">
-            <br />
-            <br />
-            <div className="w-full bg-white px-6 py-16 md:px-10 md:py-20">
-              {/* Título */}
-              <div className="text-center mb-14">
-                <span className="text-sm font-semibold uppercase tracking-[0.2em] text-celeste">
-                  Pedidos fáciles
-                </span>
+      {/* =====================
+          CÓMO PEDIR
+      ====================== */}
+      <section className="bg-white p-6 md:p-10">
 
-                <h2 className="mt-2 text-3xl md:text-4xl font-serif text-carbon">
-                  ¿Cómo pedir?
-                </h2>
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-10 md:flex-row">
 
-                <p className="mt-3 mx-auto max-w-xl text-sm md:text-base text-carbon/70 font-sans">
-                  Hacé tu pedido de manera rápida y sencilla. Nosotros nos
-                  encargamos de preparar algo delicioso para vos.
-                </p>
-              </div>
+          {/* PASOS */}
+          <div className="w-full py-10 md:py-20">
 
-              {/* Pasos */}
-              <div className="relative mx-auto max-w-6xl">
-                <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-6">
-                  {/* Línea conectora - Desktop */}
-                  <div className="hidden md:block absolute top-[30px] left-[12%] right-[12%] h-px bg-celeste/30" />
+            {/* Título */}
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.1,
+              }}
+              transition={{
+                duration: 0.5,
+              }}
+              className="mb-14 text-center"
+            >
+              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-celeste">
+                Pedidos fáciles
+              </span>
 
-                  {[
-                    {
-                      paso: "1",
-                      texto: "Escribinos por WhatsApp",
-                      img: "whatsapp.png",
-                    },
-                    {
-                      paso: "2",
-                      texto: "Contanos qué querés pedir",
-                      img: "notas.png",
-                    },
-                    {
-                      paso: "3",
-                      texto: "Confirmamos tiempo y detalles",
-                      img: "tiempo-rapido.png",
-                    },
-                    {
-                      paso: "4",
-                      texto: "Retirá o recibilo en tu casa",
-                      img: "caja.png",
-                    },
-                  ].map((item) => (
-                    <div
-                      key={item.paso}
-                      className="group relative flex flex-col items-center text-center"
-                    >
-                      {/* Número */}
-                      <div className="relative z-10 flex size-14 items-center justify-center rounded-full bg-white border-2 border-celeste shadow-sm transition-all duration-300 group-hover:bg-celeste group-hover:text-white">
-                        <span className="text-lg font-semibold text-celeste group-hover:text-white">
-                          {item.paso}
-                        </span>
-                      </div>
+              <h2 className="mt-2 font-serif text-3xl text-carbon md:text-4xl">
+                ¿Cómo pedir?
+              </h2>
 
-                      {/* Icono */}
-                      <div className="mt-6 flex size-20 items-center justify-center rounded-2xl bg-celeste/10 transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-celeste/15">
-                        <img
-                          src={`/${item.img}`}
-                          alt=""
-                          className="size-10 object-contain"
-                        />
-                      </div>
+              <p className="mx-auto mt-3 max-w-xl font-sans text-sm text-carbon/70 md:text-base">
+                Hacé tu pedido de manera rápida y sencilla. Nosotros nos
+                encargamos de preparar algo delicioso para vos.
+              </p>
+            </motion.div>
 
-                      {/* Texto */}
-                      <p className="mt-5 max-w-[12rem] text-sm md:text-base font-semibold leading-snug text-carbon">
-                        {item.texto}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {/* Lista de pasos */}
+            <div className="relative grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4 md:gap-6">
 
-              {/* CTA */}
-              <div className="mt-14 flex justify-center">
-                <a
-                  href="https://wa.me/542625591849?text=Hola,%20quiero%20hacer%20un%20pedido"
-                  className="inline-flex items-center gap-2 rounded-full bg-celeste px-6 py-3 text-sm font-semibold text-white shadow-md shadow-celeste/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-celeste-hover hover:shadow-lg"
+              {/* Línea desktop */}
+              <div className="absolute top-[30px] right-[12%] left-[12%] hidden h-px bg-celeste/30 md:block" />
+
+              {pasosPedido.map((item, index) => (
+                <motion.div
+                  key={item.paso}
+
+                  initial={{
+                    opacity: 0,
+                    y: 20,
+                    scale: 0.96,
+                  }}
+
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                  }}
+
+                  viewport={{
+                    once: true,
+                    amount: 0.05,
+                  }}
+
+                  transition={{
+                    duration: 0.45,
+                    delay: index * 0.1,
+                  }}
+
+                  className="group relative flex flex-col items-center text-center"
                 >
-                  Hacer mi pedido
-                  <img src="whatsapp-2.png" alt="" className="size-5" />
-                </a>
-              </div>
+
+                  {/* Número */}
+                  <div className="relative z-10 flex size-14 items-center justify-center rounded-full border-2 border-celeste bg-white shadow-sm transition-all duration-300 group-hover:bg-celeste">
+
+                    <span className="text-lg font-semibold text-celeste transition-colors duration-300 group-hover:text-white">
+                      {item.paso}
+                    </span>
+
+                  </div>
+
+                  {/* Icono */}
+                  <div className="mt-6 flex size-20 items-center justify-center rounded-2xl bg-celeste/10 transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-celeste/15">
+
+                    <img
+                      src={`/${item.img}`}
+                      alt=""
+                      className="size-10 object-contain"
+                    />
+
+                  </div>
+
+                  {/* Texto */}
+                  <p className="mt-5 max-w-[12rem] text-sm font-semibold leading-snug text-carbon md:text-base">
+                    {item.texto}
+                  </p>
+
+                </motion.div>
+              ))}
+
             </div>
+
+            {/* CTA */}
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 15,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.1,
+              }}
+              transition={{
+                duration: 0.5,
+              }}
+              className="mt-14 flex justify-center"
+            >
+              <motion.a
+                whileHover={{
+                  scale: 1.03,
+                  y: -2,
+                }}
+                whileTap={{
+                  scale: 0.97,
+                }}
+                href="https://wa.me/542625591849?text=Hola,%20quiero%20hacer%20un%20pedido"
+                className="inline-flex items-center gap-2 rounded-full bg-celeste px-6 py-3 text-sm font-semibold text-white shadow-md shadow-celeste/20 transition-colors duration-300 hover:bg-celeste-hover"
+              >
+                Hacer mi pedido
+
+                <img
+                  src="/whatsapp-2.png"
+                  alt="WhatsApp"
+                  className="size-5"
+                />
+              </motion.a>
+            </motion.div>
+
           </div>
-          <br />
-          {/* div 2 */}
-          <div
-            className="
-    min-h-[162px]
-    md:min-h-[300px]
-    w-full max-w-sm
 
-    bg-no-repeat
-
-    bg-[length:140%_auto]
-    md:bg-[length:140%_auto]
-
-    bg-[10%_rigth]
-    md:bg-rigth
-
-    rounded-3xl
-
-    px-10
-    py-5
-    md:py-15
-  "
+          {/* =====================
+              BANNER
+          ====================== */}
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: 25,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.1,
+            }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut",
+            }}
+            className="min-h-[162px] w-full max-w-sm rounded-3xl bg-[length:140%_auto] bg-no-repeat px-10 py-5 md:min-h-[300px] md:py-15"
             style={{
-              backgroundImage: `url("cupcake-fondo.png")`,
+              backgroundImage: 'url("/cupcake-fondo.png")',
             }}
           >
-            <p className="text-lg text-carbon text-start">
+            <p className="text-start text-lg text-carbon">
               Pedidos con 24hs
               <br />
               de anticipación
             </p>
-            <br />
-            <p className="text-xs text-start font-sans text-gray-blue">
+
+            <p className="mt-5 text-start font-sans text-xs text-gray-blue">
               Gracias por elegir
               <br />
               lo hecho con amor
-              <br />
-              <br />
-              <img src="corazon.png" alt="" className="size-5" />
             </p>
-          </div>
+
+            <img
+              src="/corazon.png"
+              alt=""
+              className="mt-4 size-5"
+            />
+          </motion.div>
+
         </div>
       </section>
-      <section> </section>
-      <section></section>
     </>
   );
 };
+
