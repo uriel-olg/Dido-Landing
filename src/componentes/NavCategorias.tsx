@@ -11,7 +11,7 @@ export const NavCategorias = () =>{
         {categorias.map(p => {
             return (
                 <div >
-                    <p>{p}</p>
+                    <p>{p.img}</p>
                 </div>
             )
         })}
