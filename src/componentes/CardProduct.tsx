@@ -28,7 +28,7 @@ export default function CardProduct({ producto }: ProductCardProps) {
           </h3>
 
           <p className="mt-1 text-sm text-gray-blue">
-            Elaborado artesanalmente
+            {producto.descripcion}
           </p>
         </div>
 

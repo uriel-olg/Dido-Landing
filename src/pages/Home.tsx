@@ -10,6 +10,7 @@ import { getProducto } from "../sanity/productos";
 import { urlFor } from "../sanity/imageUrl";
 
 import type { Producto } from "../types/ProductoType";
+import CardProduct from "../componentes/CardProduct";
 
 const pasosPedido = [
   {
@@ -230,71 +231,9 @@ export const Home = () => {
         <div className="mt-8 flex w-full max-w-5xl snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:grid md:max-w-6xl md:grid-cols-4 md:gap-15 md:overflow-visible">
 
           {destacados.map((producto, index) => (
-            <motion.div
-              key={producto._id}
 
-              initial={{
-                opacity: 0,
-                y: 25,
-              }}
-
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-
-              viewport={{
-                once: true,
-                amount: 0.05,
-              }}
-
-              transition={{
-                duration: 0.5,
-                delay: index * 0.08,
-              }}
-
-              whileHover={{
-                y: -5,
-              }}
-
-              className="flex w-64 shrink-0 snap-center flex-col overflow-hidden rounded-xl bg-white shadow-lg shadow-black/10 transition-shadow duration-300 hover:shadow-xl md:w-auto"
-            >
-
-              {/* Imagen */}
-              <div className="overflow-hidden">
-                <img
-                  src={urlFor(producto.imagen).url()}
-                  alt={producto.nombre}
-                  className="h-48 w-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-
-              {/* Información */}
-              <div className="flex flex-col items-center p-4 text-center font-serif text-carbon">
-
-                <h3 className="font-sans text-lg">
-                  {producto.nombre}
-                </h3>
-
-                <p className="mt-1 text-celeste">
-                  {producto.precio}
-                </p>
-
-                <motion.a
-                  whileHover={{
-                    scale: 1.03,
-                  }}
-                  whileTap={{
-                    scale: 0.97,
-                  }}
-                  href={`https://wa.me/542625591849?text=Hola, quiero hacer un pedido de: ${producto.nombre}`}
-                  className="mt-5 rounded-3xl border border-celeste-hover px-13 py-1 font-sans text-carbon transition-colors duration-200 hover:bg-celeste-hover hover:text-white"
-                >
-                  Pedir
-                </motion.a>
-
-              </div>
-            </motion.div>
+            <CardProduct producto={producto}></CardProduct>
+            
           ))}
 
         </div>
@@ -325,7 +264,7 @@ export const Home = () => {
         >
           <NavLink
             to="/productos"
-            className="block rounded-full border border-celeste bg-celeste px-20 py-2 font-sans text-white transition-colors duration-200 hover:bg-celeste-hover"
+            className="block rounded-full border border-celeste  px-20 py-2 font-sans text-celeste transition-colors duration-200 hover:bg-celeste-hover hover:text-white"
           >
             Ver todo el menú →
           </NavLink>
